@@ -1,0 +1,1552 @@
+// ブレイクポイント
+$pc: 961px; // PC
+$tab: 960px; // tab
+$sp: 700px; // スマホ
+$se: 360px; // iPhoneSE
+
+@mixin pc {
+  @media (min-width: ($pc)) {
+    @content;
+  }
+}
+@mixin tab {
+  @media (max-width: ($tab)) {
+    @content;
+  }
+}
+@mixin sp {
+  @media (max-width: ($sp)) {
+    @content;
+  }
+}
+@mixin se {
+  @media (max-width: ($se)) {
+    @content;
+  }
+}
+
+// 表示、非表示 レスポンシブ
+.sp {
+  @include pc {
+    display: none;
+  }
+  @include tab {
+    display: none;
+  }
+  @include sp {
+    display: block;
+  }
+}
+.tab {
+  @include pc {
+    display: none;
+  }
+  @include tab {
+    display: block;
+  }
+  @include sp {
+    display: none;
+  }
+}
+.pc {
+  @include pc {
+    display: block;
+  }
+  @include tab {
+    display: none;
+  }
+  @include sp {
+    display: none;
+  }
+}
+.sptab {
+  @include pc {
+    display: none;
+  }
+  @include tab {
+    display: block;
+  }
+  @include sp {
+    display: block;
+  }
+}
+.sppc {
+  @include pc {
+    display: block;
+  }
+  @include tab {
+    display: none;
+  }
+  @include sp {
+    display: block;
+  }
+}
+.tabpc {
+  @include pc {
+    display: block;
+  }
+  @include tab {
+    display: block;
+  }
+  @include sp {
+    display: none;
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+html {
+  margin: 0 auto;
+  font-family: "Bad Script", "Sawarabi Gothic";
+}
+
+$color1: #572b23;
+$color2: #315611;
+$color3: #f6f3eb;
+
+// ボタンのミキシン
+@mixin btn1($color) {
+  .btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid $color;
+    color: $color;
+    text-decoration: none;
+    transition: 0.3s;
+    background-color: rgba(255, 255, 255, 0.8);
+    z-index: 10;
+    width: 200px;
+    height: 56px;
+    font-size: 24px;
+  }
+  .btn:hover {
+    color: #fff;
+  }
+  .btn::before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    content: "";
+    background: $color;
+    transform-origin: right top;
+    transform: scale(0, 1);
+    transition: transform 0.3s;
+  }
+  .btn:hover::before {
+    transform-origin: left top;
+    transform: scale(1, 1);
+  }
+}
+// レスポンシブにて大きさ変わるボタン
+@mixin btn2($color) {
+  .btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid $color;
+    text-decoration: none;
+    transition: 0.3s;
+    background-color: rgba(255, 255, 255, 0.1);
+    z-index: 10;
+    font-size: 24px;
+    color: $color2;
+    @include pc {
+      width: 200px;
+      height: 56px;
+    }
+    @include tab {
+      width: 200px;
+      height: 56px;
+    }
+    @include sp {
+      width: 45vw;
+      max-width: 160px;
+      height: 48px;
+    }
+  }
+  .btn:hover {
+    color: #fff;
+  }
+  .btn::before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    content: "";
+    background: $color;
+    transform-origin: right top;
+    transform: scale(0, 1);
+    transition: transform 0.3s;
+  }
+  .btn:hover::before {
+    transform-origin: left top;
+    transform: scale(1, 1);
+  }
+}
+// サイズが元々小さいボタン
+@mixin btn3($color) {
+  .btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid $color;
+    color: $color;
+    text-decoration: none;
+    transition: 0.3s;
+    background-color: rgba(255, 255, 255, 0.1);
+    z-index: 10;
+    width: 120px;
+    height: 40px;
+    font-size: 14px;
+  }
+  .btn:hover {
+    color: #fff;
+  }
+  .btn::before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    content: "";
+    background: $color;
+    transform-origin: right top;
+    transform: scale(0, 1);
+    transition: transform 0.3s;
+  }
+  .btn:hover::before {
+    transform-origin: left top;
+    transform: scale(1, 1);
+  }
+}
+
+header {
+  @include pc {
+    padding: 0px 129px 0px 120px;
+  }
+  @include tab {
+    padding: 0px 40px 0px 40px;
+  }
+  @include sp {
+    padding: 0px 16px 0px 16px;
+  }
+  position: fixed;
+  top: 0;
+  z-index: 20;
+  width: 100%;
+  // max-width: 1366px;
+  height: 80px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.8);
+  .logo {
+    text-decoration: none;
+    color: #572b23;
+    @include pc {
+      font-size: 32px;
+    }
+    @include tab {
+      font-size: 32px;
+    }
+    @include sp {
+      font-size: 20px;
+    }
+  }
+  .collapse {
+    @include pc {
+      display: block;
+    }
+    @include tab {
+      display: block;
+    }
+    @include sp {
+      display: none;
+    }
+    margin-left: auto;
+    .navbar {
+      display: flex;
+      align-items: center;
+      list-style: none;
+      .nav-item {
+        width: 90px;
+        margin-right: 10px;
+        .link {
+          text-decoration: none;
+          color: #572b23;
+          text-align: center;
+          p {
+            font-size: 24px;
+          }
+          p:nth-child(2) {
+            line-height: 20px;
+            font-size: 14px;
+          }
+        }
+      }
+      .nav-item:last-child {
+        padding-right: 0;
+        .link {
+          color: #315611;
+        }
+      }
+      .nav_effect {
+        position: relative;
+        display: inline-block;
+        text-decoration: none;
+      }
+      .nav_effect::after {
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        content: "";
+        width: 100%;
+        height: 2px;
+        background: #333;
+        transform: scale(0, 1);
+        transform-origin: right top;
+        transition: transform 0.3s;
+      }
+      .nav_effect:last-child::after {
+        background: $color2;
+      }
+      .nav_effect:hover::after {
+        transform-origin: left top;
+        transform: scale(1, 1);
+      }
+    }
+  }
+  .toggler {
+    position: relative;
+    border: none;
+    outline: 0;
+    width: 45px;
+    height: 25px;
+    box-sizing: border-box;
+    margin-left: auto;
+    background-color: rgba(255, 255, 255, 0);
+    z-index: 6;
+    @include pc {
+      display: none;
+    }
+    @include tab {
+      display: none;
+    }
+    @include sp {
+      display: block;
+    }
+    i {
+      display: block;
+      height: 1px;
+      width: 45.25px;
+      background-color: #315611;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, 0%);
+      transition: 0.5s;
+      z-index: 6;
+    }
+    i:nth-child(1) {
+      transform: translate(-50%, -12px);
+    }
+    i:nth-child(3) {
+      transform: translate(-50%, 12px);
+    }
+  }
+  .show {
+    // クリック後
+    i:nth-child(1) {
+      transform: rotate(45deg) translate(-50%, 0);
+      transform-origin: 0% 50%;
+    }
+    i:nth-child(2) {
+      opacity: 0;
+    }
+    i:nth-child(3) {
+      transform: rotate(-45deg) translate(-50%, 0);
+      transform-origin: 0% 50%;
+    }
+  }
+
+  #drawer-menu {
+    position: fixed;
+    top: 0px;
+    right: -263px;
+    background-color: rgba(246, 243, 235, 0.9);
+    list-style: none;
+    width: 263px;
+    height: 100%;
+    padding: 0;
+    display: none;
+    z-index: 5;
+    .drawer-container {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .drawer-menu-rist {
+        list-style: none;
+        width: 84px;
+        height: 328px;
+        .drawer-menu-item {
+          padding: 0px;
+          margin-bottom: 24px;
+          .link {
+            text-decoration: none;
+            color: rgba(87, 43, 35, 1);
+            p {
+              font-size: 24px;
+              line-height: 45px;
+            }
+            p:nth-child(2) {
+              font-size: 14px;
+              line-height: 20px;
+            }
+          }
+        }
+        .drawer-menu-item:last-child {
+          margin-bottom: 0px;
+          .link {
+            p {
+              color: rgba(50, 88, 17, 1);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+#layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 4;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0);
+  display: none;
+}
+
+#top {
+  background-image: url(../img/top-image.png);
+  background-repeat: no-repeat;
+  width: 100%;
+  @include pc {
+    height: 768px;
+    background-position: center right;
+    background-size: cover;
+  }
+  @include tab {
+    height: 1023px;
+    background-position: center right;
+    background-size: cover;
+  }
+  @include sp {
+    height: 667px;
+    background-position: center;
+    background-size: cover;
+  }
+  #top-container {
+    @include pc {
+      padding-top: 345px;
+    }
+    @include tab {
+      padding-top: 325px;
+    }
+    @include sp {
+      padding-top: 298px;
+    }
+    #top-h1 {
+      @include pc {
+        width: 850px;
+        height: 100px;
+        margin-right: auto;
+        justify-content: start;
+        padding-left: 120px;
+        box-sizing: border-box;
+        margin-bottom: 24px;
+      }
+      @include tab {
+        width: 100vw;
+        height: 100px;
+        margin: 0;
+        justify-content: center;
+        padding: 0;
+        margin-bottom: 40px;
+      }
+      @include sp {
+        width: 90vw;
+        height: 56px;
+        margin: 0;
+        justify-content: start;
+        padding: 0 0 0 23px;
+        box-sizing: border-box;
+        margin-bottom: 16px;
+      }
+      background-color: rgba(255, 255, 255, 0.8);
+      display: flex;
+      align-items: center;
+      h1 {
+        color: #315611;
+        @include pc {
+          font-size: 40px;
+        }
+        @include tab {
+          font-size: 40px;
+        }
+        @include sp {
+          font-size: 18px;
+        }
+        @include se {
+          font-size: 15px;
+        }
+      }
+    }
+    #top-p {
+      background-color: rgba(255, 255, 255, 0.8);
+      @include pc {
+        width: 533px;
+        height: 60px;
+        padding-left: 120px;
+        margin-right: auto;
+      }
+      @include tab {
+        width: 344px;
+        height: 60px;
+        padding-left: 120px;
+        margin-right: auto;
+      }
+      @include sp {
+        width: 227px;
+        height: 48px;
+        padding-left: 24px;
+        margin-right: auto;
+      }
+      display: flex;
+      align-items: center;
+      p {
+        @include pc {
+          font-size: 24px;
+        }
+        @include tab {
+          font-size: 24px;
+        }
+        @include sp {
+          font-size: 16px;
+        }
+        color: #572b23;
+      }
+    }
+    .btn-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 115px;
+      @include btn1($color1);
+    }
+  }
+}
+
+#profile {
+  position: relative;
+  #profile-decoration1 {
+    background-image: url(../img/グループ343.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 96px;
+    height: 96px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+  }
+  #profile-decoration2 {
+    background-image: url(../img/グループ344.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 96px;
+    height: 96px;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+  }
+  #profile-decoration3 {
+    color: #f6f3eb;
+    position: absolute;
+    top: 0;
+    right: 40px;
+    z-index: -1;
+    @include pc {
+      font-size: 120px;
+    }
+    @include tab {
+      font-size: 120px;
+    }
+    @include sp {
+      font-size: 100px;
+    }
+  }
+
+  .profile-container {
+    @include pc {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 95vw;
+      max-width: 981px;
+      margin: 0 auto;
+      padding-top: 128px;
+      padding-bottom: 88px;
+    }
+    @include tab {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      width: 95vw;
+      max-width: 704px;
+      margin: 0 auto;
+      padding-top: 203px;
+      padding-bottom: 144px;
+    }
+    @include sp {
+      display: flex;
+      flex-direction: column;
+      width: 80%;
+      padding-bottom: 144px;
+      margin: 0 auto;
+    }
+    .profile-image-container {
+      position: relative;
+      .profile_content {
+        @include pc {
+          width: 400px;
+          height: 500px;
+        }
+        @include tab {
+          width: 297px;
+          height: 371px;
+        }
+        @include sp {
+          width: 100%;
+          height: 0;
+          padding-top: calc(100% * (330 / 316));
+        }
+      }
+      .profile_image {
+        position: relative;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        z-index: 10;
+        box-sizing: border-box;
+        @include pc {
+          background-image: url(../img/profile.png);
+          margin-right: 80px;
+          margin-bottom: 0px;
+        }
+        @include tab {
+          background-image: url(../img/profile.png);
+          margin-right: 32px;
+          margin-bottom: 0px;
+        }
+        @include sp {
+          background-image: url(../img/profile_sp.png);
+          margin-right: 0;
+          margin-bottom: 40px;
+        }
+      }
+      .decoration1 {
+        position: absolute;
+        top: -8px;
+        left: -8px;
+        border: 1px solid $color2;
+        z-index: 5;
+      }
+      .decoration2 {
+        position: absolute;
+        top: 8px;
+        left: 8px;
+        border: 1px solid $color2;
+        z-index: 5;
+      }
+    }
+    .profile-desc {
+      @include pc {
+        min-width: 400px;
+        max-width: 493px;
+        height: 500px;
+        padding: 0;
+      }
+      @include tab {
+        width: 360px;
+        height: 311px;
+        padding: 0;
+      }
+      @include sp {
+        width: 100%;
+        padding: 0;
+      }
+      h2 {
+        color: #572b23;
+        font-weight: normal;
+        width: 250px;
+        @include pc {
+          font-size: 36px;
+          margin-bottom: 40px;
+          text-align: left;
+        }
+        @include tab {
+          position: absolute;
+          top: 120px;
+          left: 50%;
+          text-align: center;
+          transform: translateX(-50%);
+          -webkit-transform: translateX(-50%);
+          -ms-transform: translateX(-50%);
+          font-size: 32px;
+        }
+        @include sp {
+          position: absolute;
+          top: 80px;
+          left: 50%;
+          text-align: center;
+          transform: translateX(-50%);
+          -webkit-transform: translateX(-50%);
+          -ms-transform: translateX(-50%);
+          font-size: 32px;
+        }
+      }
+      p {
+        color: #572b23;
+        font-family: Sawarabi Gothic, Regular;
+        letter-spacing: 0.36px;
+        text-align: left;
+        @include pc {
+          font-size: 18px;
+          margin-bottom: 40px;
+        }
+        @include tab {
+          font-size: 16px;
+          margin-bottom: 0px;
+        }
+        @include sp {
+          font-size: 16px;
+          margin-bottom: 0px;
+        }
+      }
+      #sns-link-container {
+        @include pc {
+          width: 440px;
+        }
+        @include tab {
+          position: absolute;
+          bottom: 40px;
+          left: 50%;
+          transform: translateX(-50%);
+          -webkit-transform: translateX(-50%);
+          -ms-transform: translateX(-50%);
+          width: 424px;
+        }
+        @include sp {
+          position: absolute;
+          // top: 0;
+          bottom: 64px;
+          left: 50%;
+          transform: translateX(-50%);
+          -webkit-transform: translateX(-50%);
+          -ms-transform: translateX(-50%);
+          width: 95vw;
+          max-width: 336px;
+        }
+        display: flex;
+        justify-content: space-between;
+        @include btn2($color2);
+      }
+    }
+  }
+}
+
+#works {
+  background-color: #f9f9f9;
+  position: relative;
+  #works-decoration1 {
+    background-image: url(../img/グループ339.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 96px;
+    height: 96px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+  }
+  #works-decoration2 {
+    background-image: url(../img/グループ340.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 96px;
+    height: 96px;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+  }
+  #works-decoration3 {
+    @include pc {
+      font-size: 120px;
+    }
+    @include tab {
+      font-size: 120px;
+    }
+    @include sp {
+      font-size: 100px;
+    }
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    color: $color3;
+  }
+  h2 {
+    position: relative;
+    padding: 120px 0 66px;
+    text-align: center;
+    z-index: 1;
+    color: $color1;
+    font-weight: normal;
+    @include pc {
+      font-size: 36px;
+    }
+    @include tab {
+      font-size: 36px;
+    }
+    @include sp {
+      font-size: 32px;
+    }
+  }
+  .card-wrapper {
+    @include pc {
+      width: 898px;
+      margin: 0 auto;
+      padding-bottom: 48px;
+    }
+    @include tab {
+      width: 500px;
+      margin: 0 auto;
+      padding-bottom: 80px;
+    }
+    @include sp {
+      width: 85%;
+      margin: 0 auto;
+      padding-bottom: 64px;
+    }
+    .card-container {
+      @include pc {
+        display: flex;
+        flex-direction: row;
+        margin: 0 0 32px 0;
+      }
+      @include tab {
+        display: flex;
+        flex-direction: column;
+        margin: 0 0 40px 0;
+      }
+      @include sp {
+        display: flex;
+        flex-direction: column;
+        margin: 0 auto 40px;
+      }
+      .works-image-container {
+        position: relative; // decorationの位置決めに必要なrelativeの為だけの要素。実体無し。大きさは子要素に依存。
+        @include pc {
+          margin: 0;
+        }
+        @include tab {
+          margin: 0 auto;
+        }
+        @include sp {
+          margin: 0;
+        }
+        .card {
+          @include pc {
+            margin-right: 32px;
+            width: 350px;
+            height: 200px;
+            padding-top: 0;
+          }
+          @include tab {
+            width: 350px;
+            height: 200px;
+            padding-top: 0;
+          }
+          @include sp {
+            width: 100%;
+            height: 0;
+            padding-top: calc(100% * (400 / 700));
+          }
+        }
+        .decoration1 {
+          border: 1px solid $color2;
+          position: absolute;
+          top: -8px;
+          left: -8px;
+          z-index: 1;
+        }
+        .decoration2 {
+          border: 1px solid $color2;
+          position: absolute;
+          top: 6px;
+          left: 6px;
+          z-index: 1;
+        }
+        .card-image1 {
+          background-image: url(../img/work1@2x.png);
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: contain;
+          position: relative;
+          z-index: 2;
+          // absoluteだと表示が崩れる。z-indexの為だけに relative使用。
+        }
+        .card-image2 {
+          background-image: url(../img/work2@2x.png);
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: cover;
+          position: relative;
+          // absoluteだと表示が崩れる。z-indexの為だけに relative使用。
+          z-index: 2;
+        }
+        .card-image3 {
+          background-image: url(../img/work3@2x.png);
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: cover;
+          position: relative;
+          // absoluteだと表示が崩れる。z-indexの為だけに relative使用。
+          z-index: 2;
+        }
+      }
+      .card-desc {
+        @include pc {
+          width: 500px;
+        }
+        @include tab {
+          width: 500px;
+        }
+        @include sp {
+          width: 100%;
+          margin: 0 auto;
+        }
+        h3 {
+          font-weight: normal;
+          color: $color1;
+          line-height: 45px;
+          @include pc {
+            margin: 0 0 16px;
+            font-size: 32px;
+          }
+          @include tab {
+            margin: 16px 0;
+            font-size: 32px;
+          }
+          @include sp {
+            margin: 16px 0;
+            font-size: 24px;
+          }
+        }
+        p {
+          font-size: 16px;
+          color: $color1;
+          letter-spacing: 0.32px;
+          font-family: Sawarabi Gothic;
+          margin-bottom: 16px;
+        }
+        .link-container {
+          display: flex;
+          @include pc {
+            justify-content: flex-end;
+            margin-bottom: 32px;
+          }
+          @include tab {
+            justify-content: center;
+            margin-bottom: 0px;
+          }
+          @include sp {
+            justify-content: center;
+            margin-bottom: 0px;
+          }
+          @include btn3($color2);
+        }
+      }
+    }
+  }
+}
+
+#skill {
+  position: relative;
+  #skill-decoration1 {
+    background-image: url(../img/グループ343.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 96px;
+    height: 96px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+  }
+  #skill-decoration2 {
+    background-image: url(../img/グループ344.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 96px;
+    height: 96px;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+  }
+  #skill-decoration3 {
+    @include pc {
+      font-size: 120px;
+      left: 40px;
+    }
+    @include tab {
+      font-size: 120px;
+      left: 40px;
+    }
+    @include sp {
+      font-size: 100px;
+      left: 24px;
+    }
+    position: absolute;
+    top: 0;
+    z-index: -1;
+    color: $color3;
+  }
+  #skill-wrapper {
+    @include pc {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      width: 88vw;
+      max-width: 1036px;
+      margin: 0 auto;
+      padding: 120px 0px 80px;
+    }
+    @include tab {
+      display: block;
+      margin: 0 auto;
+      width: 500px;
+      padding: 203px 0px 80px;
+      box-sizing: border-box;
+    }
+    @include sp {
+      display: block;
+      margin: 0 auto;
+      padding: 163px 0px 64px;
+      width: 90vw;
+      box-sizing: border-box;
+    }
+    #skill-desc {
+      @include pc {
+        margin-right: 80px;
+        min-width: 320px;
+        max-width: 500px;
+        margin-bottom: 0px;
+        box-sizing: border-box;
+      }
+      @include tab {
+        margin-right: 0px;
+        width: 500px;
+        margin-bottom: 40px;
+      }
+      @include sp {
+        margin-right: 0px;
+        width: 100%;
+        margin-bottom: 40px;
+      }
+      h2 {
+        @include pc {
+          font-size: 36px;
+        }
+        @include tab {
+          position: absolute;
+          top: 120px;
+          left: 50%;
+          transform: translateX(-50%);
+          -webkit-transform: translateX(-50%);
+          -ms-transform: translateX(-50%);
+          font-size: 36px;
+        }
+        @include sp {
+          position: absolute;
+          top: 80px;
+          left: 50%;
+          transform: translateX(-50%);
+          -webkit-transform: translateX(-50%);
+          -ms-transform: translateX(-50%);
+          font-size: 32px;
+        }
+        color: $color1;
+        z-index: 1;
+        margin-bottom: 40px;
+        font-weight: normal;
+      }
+      p {
+        @include pc {
+          font-size: 18px;
+        }
+        @include tab {
+          font-size: 16px;
+        }
+        @include sp {
+          font-size: 16px;
+        }
+        line-height: 32px;
+        letter-spacing: 0.35px;
+        font-family: Sawarabi Gothic;
+        color: $color1;
+      }
+    }
+    #skill-image {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      @include pc {
+        align-items: center;
+      }
+      @include tab {
+        align-items: flex-start;
+      }
+      @include sp {
+        align-items: center;
+      }
+      #skill-image1 {
+        background-image: url(../img/1544078499.png);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        @include pc {
+          width: 320px;
+          height: 320px;
+          margin-right: 16px;
+        }
+        @include tab {
+          width: 320px;
+          height: 320px;
+          margin-right: 16px;
+        }
+        @include sp {
+          width: 200px;
+          height: 200px;
+          margin-right: 16px;
+        }
+      }
+      #skill-list {
+        ul {
+          list-style: none;
+          li {
+            @include pc {
+              font-size: 18px;
+            }
+            @include tab {
+              font-size: 18px;
+            }
+            @include sp {
+              font-size: 16px;
+            }
+            color: $color1;
+            font-family: Sawarabi Gothic;
+            padding-bottom: 10px;
+          }
+          li::before {
+            content: "□";
+            color: $color2;
+            margin-right: 5px;
+          }
+        }
+      }
+    }
+  }
+}
+
+#contact {
+  position: relative;
+  background-color: #f9f9f9;
+  #contact-decoration1 {
+    background-image: url(../img/グループ341.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 96px;
+    height: 96px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+  }
+  #contact-decoration2 {
+    background-image: url(../img/グループ342.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 96px;
+    height: 96px;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+  }
+  #contact-decoration3 {
+    @include pc {
+      font-size: 120px;
+    }
+    @include tab {
+      font-size: 120px;
+    }
+    @include sp {
+      font-size: 100px;
+    }
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    color: $color3;
+  }
+  h2 {
+    padding: 120px 0px 66px;
+    position: relative;
+    text-align: center;
+    color: $color1;
+    z-index: 1;
+    font-weight: normal;
+    @include pc {
+      font-size: 36px;
+    }
+    @include tab {
+      font-size: 36px;
+    }
+    @include sp {
+      font-size: 32px;
+    }
+  }
+  #contact-space {
+    background-color: #fff;
+    position: relative;
+    margin: 0 auto;
+    border: 1.5px solid $color2;
+    @include pc {
+      width: 750px;
+      height: 520px;
+    }
+    @include tab {
+      width: 380px;
+      height: 500px;
+    }
+    @include sp {
+      width: 350px;
+      height: 500px;
+    }
+    @include se {
+      width: 300px;
+      height: 500px;
+    }
+
+    #contact-image1 {
+      @include pc {
+        background-image: url(../img/グループ453.svg);
+        width: 750px;
+        height: 160px;
+      }
+      @include tab {
+        background-image: url(../img/グループ452.svg);
+        width: 380px;
+        height: 50px;
+      }
+      @include sp {
+        background-image: url(../img/グループ452.svg);
+        background-position: 0 0;
+        background-size: contain;
+        width: 100%;
+        max-width: 350px;
+        height: 50px;
+      }
+      @include se {
+        background-image: url(../img/グループ452.svg);
+        background-position: 0 0;
+        background-size: cover;
+        width: 100%;
+        max-width: 350px;
+        height: 39px;
+      }
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      position: absolute;
+      top: 0;
+    }
+    .form {
+      @include pc {
+        width: 633px;
+        height: 248px;
+        margin: 0 auto;
+        margin-top: 200px;
+      }
+      @include tab {
+        width: 300px;
+        height: 360px;
+        margin: 0 auto;
+        margin-top: 80px;
+      }
+      @include sp {
+        width: 350px;
+        height: 360px;
+        margin: 0 auto;
+        margin-top: 80px;
+      }
+      @include se{
+        width: 300px;
+        height: 360px;
+        margin: 0 auto;
+        margin-top: 80px;
+
+      }
+      .input-inner {
+        position: relative;
+        @include pc {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          flex-wrap: nowrap;
+          margin-bottom: 20px;
+          width: 653px;
+          flex-wrap: wrap;
+        }
+        @include tab {
+          display: flex;
+          flex-direction: column;
+          // justify-content: space-between;
+          flex-wrap: nowrap;
+        }
+        @include sp {
+        }
+        .input {
+          display: flex;
+          border-bottom: 1px solid $color1;
+          margin-bottom: 25px;
+          @include pc {
+            width: 300px;
+          }
+          @include tab {
+            width: 300px;
+          }
+          @include sp {
+            width: 85%;
+            max-width: 300px;
+            align-self: center;
+          }
+          label {
+            display: block;
+            font-size: 16px;
+            width: 50px;
+            margin-right: 10px;
+            padding-left: 8.5px;
+            color: $color1;
+            opacity: 0.8;
+          }
+          input {
+            font-size: 16px;
+            width: 200px;
+            border: none;
+            background-color: #fff;
+            outline: 0;
+          }
+          input::placeholder {
+            color: $color2;
+            opacity: 0.5;
+            font-family: Bad Script;
+            // padding-left: 8px;
+          }
+          textarea {
+            height: 160px;
+            position: absolute;
+            padding: 8px;
+            box-sizing: border-box;
+            outline: 0;
+            border: 1px solid $color1;
+            @include pc {
+              width: 300px;
+              top: 87px;
+              right: 0;
+            }
+            @include tab {
+              width: 300px;
+              top: 200px;
+              right: 0;
+            }
+            @include sp {
+              width: 85%;
+              max-width: 300px;
+              top: 200px;
+              left: 50%;
+              transform: translateX(-50%);
+              -webkit-transform: translateX(-50%);
+              -ms-transform: translateX(-50%);
+            }
+          }
+          textarea::placeholder {
+            color: $color2;
+            font-family: Bad Script;
+            font-size: 16px;
+            // padding-top: -8px;
+            opacity: 0.5;
+          }
+        }
+        .input_email {
+          order: 1;
+        }
+        .input_sub {
+          @include pc {
+            order: 2;
+          }
+          @include tab {
+            order: 3;
+          }
+          @include sp {
+            order: 3;
+          }
+        }
+        .input_name {
+          @include pc {
+            order: 3;
+          }
+          @include tab {
+            order: 2;
+          }
+          @include sp {
+            order: 2;
+          }
+        }
+        .input_message {
+          order: 4;
+        }
+      }
+      .input-inner2 {
+        display: flex;
+      }
+    }
+  }
+  .btn-container {
+    display: flex;
+    justify-content: center;
+    @include btn1($color2);
+    @include pc {
+      padding: 56px 0 80px 0;
+    }
+    @include tab {
+      padding: 40px 0 80px 0;
+    }
+    @include sp {
+      padding: 40px 0 64px 0;
+    }
+  }
+}
+
+footer {
+  position: relative;
+  @include pc {
+    height: 154px;
+  }
+  @include tab {
+    height: 154px;
+  }
+  @include sp {
+    height: 138px;
+  }
+  #footer-decoration1 {
+    background-image: url(../img/グループ357.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 96px;
+    height: 96px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+  }
+  #footer-decoration2 {
+    background-image: url(../img/グループ356.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 96px;
+    height: 96px;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+  }
+  .sns {
+    display: flex;
+    list-style: none;
+    justify-content: center;
+    @include pc {
+      padding: 40px 0 24px;
+    }
+    @include tab {
+      padding: 40px 0 24px;
+    }
+    @include sp {
+      padding: 24px 0 24px;
+    }
+    li {
+      position: relative;
+      width: 30px;
+      height: 30px;
+      padding-right: 16px;
+      i {
+        font-size: 30px;
+        color: $color1;
+      }
+      i:hover {
+        transform: translate(0, -3px);
+        transition: all 0.3s;
+      }
+    }
+    li:last-child {
+      padding-right: 0px;
+    }
+  }
+
+  .copyright_container {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 24px;
+    .copyright1 {
+      padding-top: 8px;
+      margin-right: 12px;
+      font-size: 16px;
+    }
+    .copyright2 {
+      font-size: 18px;
+    }
+  }
+}
